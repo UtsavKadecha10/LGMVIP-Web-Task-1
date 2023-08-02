@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="todo_form">
+            <div class="task">
+                Task: <input type="text" name="task" id="task_input" placeholder="Add a task" required>
+            </div>
+
+            <div class="deadline">
+                Deadline: <input type="date" name="deadline" id="deadline_input" placeholder="Add Deadline" required>
+            </div>
+            
+            <div class="priority">
+                Priority: <select name="priority" id="priority_input">
+                    <option value="Select">Select</option>
+                    <option value="Low" class="Low">Low</option>
+                    <option value="Medium" class="Medium">Medium</option>
+                    <option value="High" class="High">High</option>
+                </select>
+            </div>
+
+            <button type="submit">Add</button>
+        </form>
+        <ul id="todo_list"></ul>
+    </div>
+
+    <script>
+        const form = document.getElementById('todo_form');
+        const input = document.getElementById('task_input');
+        const prioritySelect = document.getElementById('priority_input');
+        const deadlineInput = document.getElementById('deadline_input');
+        const list = document.getElementById('todo_list');
+
+        // To save tasks in local storage so that it does not go away after reloading or refreshing
+        // Retrieve save tasks from local storage
+        let savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+       
+        // Sort tasks based on priority
+        savedTasks.sort((a,b)=>{
+            const priorityOrder = {Low: 3, Medium: 2, High: 1};
+            return priorityOrder[a.priority]-priorityOrder[b.priority];
+        })
+
+        // Populate the tasks from local storage on page load
+        savedTasks.forEach(task =>{
+            createTaskElement(task);
+        })
+
+
+        form.addEventListener('submit', function(event){
+            event.preventDefault();
+            const task = input.value.trim();
+            const priority = prioritySelect.value;
+            const deadline = deadlineInput.value;
+
+            if(task !== ''){
+                const taskObj = {
+                    task, 
+                    priority,
+                    deadline,
+                    progress: 0 
+                };
+                createTaskElement(taskObj);
+                savedTasks.push(taskObj);
+
+                localStorage.setItem('tasks', JSON.stringify(savedTasks));
+
+                input.value = '';
+                deadlineInput.value = '';
+                prioritySelect.value = 'Select';
+            }
+        });
+
+        function createTaskElement(taskObj){
+            const listItem = document.createElement('li');
+            listItem.innerHTML=`
+                <span>${taskObj.task}</span>
+                <small>${taskObj.deadline}</small>
+                <span class="priority ${taskObj.priority}">${taskObj.priority}</span>
+                <div class="progress">
+                    <div class="progress_bar" style="width: ${taskObj.progress}%;"></div>    
+                </div>
+                <button class="delete_btn">Delete</button>
+            `;
+            list.appendChild(listItem);
+
+            const deleteBtn = listItem.querySelector('.delete_btn');
+            deleteBtn.addEventListener('click', function(){
+                listItem.remove();
+                removeTaskFromLocalStorage(taskObj);
+            });
+
+            const progressBar = listItem.querySelector('.progress_bar');
+            listItem.addEventListener('click', function(){
+                if(taskObj.progress < 100){
+                    taskObj.progress += 10;
+                    progressBar.style.width = `${taskObj.progress}%`;
+
+                    if(taskObj.progress >= 100){
+                        listItem.classList.add('Completed!')
+                    }
+
+                    // Update the progress value in local storage
+                    updateProgressInLocalStorage(taskObj);
+                }
+            });
+
+            function removeTaskFromLocalStorage(taskObj){
+                const index = savedTasks.findIndex(task => task.task === taskObj.task);
+                if(index !== -1){
+                    savedTasks.splice(index, 1);
+                    localStorage.setItem('tasks', JSON.stringify(savedTasks));
+                }
+            }
+
+            function updateProgressInLocalStorage(taskObj){
+                const index = savedTasks.findIndex(task => task.task === taskObj.task);
+                if(index !== -1){
+                    savedTasks[index].progress = taskObj.progress;
+                    localStorage.setItem('tasks', JSON.stringify(savedTasks));
+                }
+            }
+        }
+    </script>
+</body>
+</html>

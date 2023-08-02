@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-weight:600;
+    background-color: #9e9999;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-image: url('background.jpeg');
+    color: black;
+}
+
+.container {
+    max-width:700px;
+    margin: 20px auto;
+    background-color: #8b8b8b;
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 1);
+    background: linear-gradient(rgb(240, 91, 91), rgba(0, 0, 0, 0));
+   
+}
+
+h1 {
+    text-align: center;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+form div{
+    border: 1px solid #d67a7a;
+    margin:10px;
+    padding: 3px;
+    /* width: 1000px; */
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px #000000;
+    background: linear-gradient(rgb(231, 130, 130), rgba(0, 0, 0, 0.4));
+}
+
+input {
+    flex: 0.7;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 7px;
+    background-color: #8b8b8b;  
+    background: linear-gradient(rgb(255, 252, 252), rgba(0, 0, 0, 0.2));
+}
+
+select{
+    height: 39px;   
+    background-color: #757474;
+    border: #615f5f;
+    border-radius: 7px;
+    background: linear-gradient(rgb(255, 255, 255), rgba(0, 0, 0, 0.2));
+}
+
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px #000000;
+    margin-right:5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border: 1px solid #615f5f;
+    height: 70px;
+    border-radius: 7px;
+    box-shadow: 7px 7px 14px #000000;
+    background: linear-gradient(rgb(219, 125, 125), rgba(0, 0, 0, 0.4));
+}
+ 
+li span{
+    flex: 1;
+    margin: 0 10px;
+}
+
+li .priority {
+    margin-right: 10px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    color: #000000;
+}
+
+li .progress {
+    width: 50%;
+    height: 5px;
+    background-color: #ddd;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+li .progress_bar {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s;
+    border-radius: 2px;
+}
+
+li button {
+    margin-left: 10px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
