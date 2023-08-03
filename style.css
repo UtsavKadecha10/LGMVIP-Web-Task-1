@@ -7,16 +7,17 @@ body {
     font-family: Georgia, 'Times New Roman', Times, serif;
     background-image: url('background.jpeg');
     color: black;
+    
 }
 
 .container {
-    max-width:700px;
+    max-width:800px;
     margin: 20px auto;
     background-color: #8b8b8b;
     padding: 20px;
     border-radius: 40px;
-    box-shadow: 20px 20px 40px rgba(0, 0, 0, 1);
-    background: linear-gradient(rgb(240, 91, 91), rgba(0, 0, 0, 0));
+    box-shadow: 0px 30px 30px 20px rgba(0, 0, 0, 1);
+    background: linear-gradient(rgb(0,0,0,0), rgba(0, 0, 0, 0));
    
 }
 
@@ -49,7 +50,7 @@ input {
     border: none;
     border-radius: 7px;
     background-color: #8b8b8b;  
-    background: linear-gradient(rgb(255, 252, 252), rgba(0, 0, 0, 0.2));
+    background: linear-gradient(rgb(228, 171, 171), rgba(0, 0, 0, 0.2));
 }
 
 select{
@@ -57,7 +58,7 @@ select{
     background-color: #757474;
     border: #615f5f;
     border-radius: 7px;
-    background: linear-gradient(rgb(255, 255, 255), rgba(0, 0, 0, 0.2));
+    background: linear-gradient(rgb(228, 171, 171), rgba(0, 0, 0, 0.2));
 }
 
 
